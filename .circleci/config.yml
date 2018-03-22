@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run: echo "Hello World"
-      - run: touch ~/repo/foobar.txt
+      - run: echo "I am a text file" >  ~/repo/foobar.txt
       - store_artifacts:
            path: ~/repo/foobar.txt
            destination: foobar.txt
