@@ -2,14 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:3.6
+      - image: docker:17.09
 
     working_directory: ~/repo
     steps:
       - checkout
-      - run: echo "Hello World"
-      - run: echo "I am a text file" >  ~/repo/foobar.txt
+      - setup_remote_docker
+      - run: docker build -t=geneerik/boinc-apk-builder $(pwd)
+      - run: mkdir $(pwd)/artifacts
+      - run: docker run -i -t -a stderr -a stdout -v $(pwd)/artifacts:/opt geneerik/boinc-apk-builder bash -i -c 'buildboincapkall.sh'
       - store_artifacts:
-           path: ~/repo/foobar.txt
-           destination: foobar.txt
+           path: ~/repo/artifacts
 
