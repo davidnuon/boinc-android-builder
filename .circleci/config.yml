@@ -8,4 +8,8 @@ jobs:
     steps:
       - checkout
       - run: echo "Hello World"
-      - run: touch $CIRCLE_ARTIFACTS/foobar.txt
+      - run: touch ~/repo/foobar.txt
+      - store_artifacts:
+           path: ~/repo/foobar.txt
+           destination: foobar.txt
+
